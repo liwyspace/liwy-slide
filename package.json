@@ -1,0 +1,55 @@
+{
+  "name": "liwy-slide",
+  "version": "1.0.0",
+  "description": "JS - 通用的JS轮播图插件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liwyspace/liwy-slide.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "liwy",
+    "email": "liwenyao_java@126.com",
+    "url": "www.oscafe.net"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liwyspace/liwy-slide/issues"
+  },
+  "homepage": "https://github.com/liwyspace/liwy-slide#readme",
+  "devDependencies": {
+    "connect-livereload": "^0.6.0",
+    "grunt": "^1.0.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-banner": "^0.6.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-compress": "^1.4.3",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^2.2.1",
+    "grunt-contrib-htmlmin": "^2.4.0",
+    "grunt-contrib-imagemin": "^2.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-karma": "^2.0.0",
+    "grunt-rev": "^0.1.0",
+    "grunt-sass": "^2.0.0",
+    "grunt-usemin": "^3.1.1",
+    "jasmine-core": "^2.7.0",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "serve-index": "^1.9.0",
+    "serve-static": "^1.12.4"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "liwy-slide",
+  "description": "JS - 通用的JS轮播图插件",
+  "main": "index.js",
+  "authors": [{
+    "name": "liwy",
+    "email": "liwenyao_java@126.com",
+    "url": "www.oscafe.net"
+  }],
+  "license": "MIT",
+  "keywords": [
+    "liwy",
+    "jquery",
+    "slide"
+  ],
+  "homepage": "https://github.com/liwyspace/liwy-slide",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

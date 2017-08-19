@@ -1,0 +1,4 @@
+/*! liwy-slide - v1.0.0 - 2017-08-19
+* https://github.com/liwyspace/liwy-slide#readme
+* Copyright (c) 2017 liwy; Licensed MIT */
+body{color:#f09}.liwy{background-color:#f09;transition:-webkit-transform 1s;transition:transform 1s}.liwy:hover{color:#909}
