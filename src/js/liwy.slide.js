@@ -1,6 +1,3 @@
-/*! liwy-slide - v1.0.0 - 2017-08-20
-* https://github.com/liwyspace/liwy-slide#readme
-* Copyright (c) 2017 liwy; Licensed MIT */
 /**
  * liwy-slide
  * @version 1.0.0
@@ -36,6 +33,7 @@
  *		 --从右到左
  * 		 --从上到下
  * 		 --从下到上
+ * 		 --褪色模式
  * @todo 事件回调函数
  * @todo 
  */

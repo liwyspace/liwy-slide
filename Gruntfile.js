@@ -314,7 +314,7 @@ module.exports = function (grunt) {
             },
             js: {
                 files: [ 'src/js/*.js' ],
-                tasks: [ 'jshint:dist', 'karma:test', 'concat:dist', 'usebanner:dist', 'uglify:dist', 'copy:docs']
+                tasks: [ 'jshint:dist', 'concat:dist', 'usebanner:dist', 'uglify:dist', 'copy:docs']
             },
             sassDocs: {
                 files: [ 'docs/src/assets/scss/*.scss' ],
