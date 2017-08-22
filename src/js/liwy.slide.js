@@ -23,7 +23,6 @@
  * @todo play/stop按钮
  * @todo dots按钮
  * 		 --自定义按钮
- * @todo 延迟加载
  * @todo 自适应
  * 		 --调整项数量
  * 		 --调整next/prev按钮显示
@@ -34,8 +33,11 @@
  * 		 --从上到下
  * 		 --从下到上
  * 		 --褪色模式
+ * @todo caption标题
+ * @todo 缩略图按钮
+ * @todo 延迟加载
  * @todo 事件回调函数
- * @todo 
+ * @todo reload slide
  */
 ;(function($, window, document, undefined) {
 
