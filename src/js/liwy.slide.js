@@ -452,16 +452,16 @@
 	        this.children.filter(':visible').fadeOut(this.options.speed).css({zIndex: 0});
 	        this.children.eq(this.active.index).css('zIndex', this.options.slideZIndex + 1).fadeIn(this.options.speed, function() {
 	          	$(this).css('zIndex', this.options.slideZIndex);
-	          	//????????????????????????????????????????????????????????????
 	          	updateAfterSlideTransition();
 	        });
-      	// slider mode is not "fade"
+
+	    //???????????????????????????????
+      	// 不是 "fade"模式
       	} else {
-	        // if adaptiveHeight is true and next height is different from current height, animate to the new height
 	        if (this.options.adaptiveHeight && this.viewport.height() !== getViewportHeight()) {
 	          this.viewport.animate({height: getViewportHeight()}, this.options.adaptiveHeightSpeed);
 	        }
-	        // if carousel and not infinite loop
+
 	        if (!this.options.infiniteLoop && this.carousel && this.active.last) {
 	          	if (this.options.mode === 'horizontal') {
 		            // get the last child position
@@ -836,91 +836,111 @@
 	          	else if (this.options.mode === 'vertical') { setPositionProperty(-position.top, 'reset', 0); }
 	        }
       	}
-      	// declare that the transition is complete
+      	// 声明转换完成
       	this.working = false;
-      	// onSlideAfter callback
-      	this.options.onSlideAfter.call(el, this.children.eq(this.active.index), this.oldIndex, this.active.index);
+      	// 条用 onSlideAfter 回调函数
+      	this.options.onSlideAfter.call(this, this.children.eq(this.active.index), this.oldIndex, this.active.index);
     };
 
     /**
-     * Sets the el's animating property position (which in turn will sometimes animate el).
-     * If using CSS, sets the transform property. If not using CSS, sets the top / left property.
+     * 设置element的动画属性的位置（这反过来又会使element）。
+     * 如果使用CSS，设置的transform 属性。如果不使用CSS设置 top/left属性
      *
      * @param value (int)
-     *  - the animating property's value
+     *  - 动画属性的值
      *
      * @param type (string) 'slide', 'reset', 'ticker'
-     *  - the type of instance for which the function is being
+     *  - 函数的类型
      *
      * @param duration (int)
-     *  - the amount of time (in ms) the transition should occupy
+     *  - 过渡所需时间（ms）
      *
      * @param params (array) optional
-     *  - an optional parameter containing any variables that need to be passed in
+     *  - 包含任何变量，需要通过一个可选的参数
      */
     var setPositionProperty = function(value, type, duration, params) {
       var animateObj, propValue;
-      // use CSS transform
-      if (slider.usingCSS) {
-        // determine the translate3d value
-        propValue = slider.settings.mode === 'vertical' ? 'translate3d(0, ' + value + 'px, 0)' : 'translate3d(' + value + 'px, 0, 0)';
-        // add the CSS transition-duration
-        el.css('-' + slider.cssPrefix + '-transition-duration', duration / 1000 + 's');
+      // 使用 CSS transform
+      if (this.usingCSS) {
+        // 确定 translate3d 值
+        propValue = this.options.mode === 'vertical' ? 'translate3d(0, ' + value + 'px, 0)' : 'translate3d(' + value + 'px, 0, 0)';
+        // 添加transition-duration样式
+        $element.css('-' + this.cssPrefix + '-transition-duration', duration / 1000 + 's');
         if (type === 'slide') {
-          // set the property value
-          el.css(slider.animProp, propValue);
-          if (duration !== 0) {
-            // bind a callback method - executes when CSS transition completes
-            el.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(e) {
-              //make sure it's the correct one
-              if (!$(e.target).is(el)) { return; }
-              // unbind the callback
-              el.unbind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd');
-              updateAfterSlideTransition();
-            });
-          } else { //duration = 0
-            updateAfterSlideTransition();
-          }
+          	// 设置 property 值
+          	$element.css(this.animProp, propValue);
+          	if (duration !== 0) {
+            	// bind a callback method - executes when CSS transition completes
+            	//绑定完成transition后的回调函数
+            	$element.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(e) {
+              		//确保它是正确的
+              		if (!$(e.target).is($element)) { return; }
+              		// 解除绑定回调函数
+              		$element.unbind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd');
+              		updateAfterSlideTransition();
+            	});
+          	} else {
+            	updateAfterSlideTransition();
+          	}
         } else if (type === 'reset') {
-          el.css(slider.animProp, propValue);
+          	$element.css(this.animProp, propValue);
         } else if (type === 'ticker') {
-          // make the transition use 'linear'
-          el.css('-' + slider.cssPrefix + '-transition-timing-function', 'linear');
-          el.css(slider.animProp, propValue);
-          if (duration !== 0) {
-            el.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(e) {
-              //make sure it's the correct one
-              if (!$(e.target).is(el)) { return; }
-              // unbind the callback
-              el.unbind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd');
-              // reset the position
-              setPositionProperty(params.resetValue, 'reset', 0);
-              // start the loop again
-              tickerLoop();
-            });
-          } else { //duration = 0
-            setPositionProperty(params.resetValue, 'reset', 0);
-            tickerLoop();
-          }
+          	// make the transition use 'linear'
+          	$element.css('-' + this.cssPrefix + '-transition-timing-function', 'linear');
+          	$element.css(this.animProp, propValue);
+          	if (duration !== 0) {
+            	$element.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(e) {
+              		if (!$(e.target).is($element)) { return; }
+              		$element.unbind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd');
+              		setPositionProperty(params.resetValue, 'reset', 0);
+              		tickerLoop();
+            	});
+          	} else { //duration = 0
+            	setPositionProperty(params.resetValue, 'reset', 0);
+            	tickerLoop();
+          	}
         }
-      // use JS animate
-      } else {
-        animateObj = {};
-        animateObj[slider.animProp] = value;
-        if (type === 'slide') {
-          el.animate(animateObj, duration, slider.settings.easing, function() {
-            updateAfterSlideTransition();
-          });
-        } else if (type === 'reset') {
-          el.css(slider.animProp, value);
-        } else if (type === 'ticker') {
-          el.animate(animateObj, duration, 'linear', function() {
-            setPositionProperty(params.resetValue, 'reset', 0);
-            // run the recursive loop after animation
-            tickerLoop();
-          });
-        }
-      }
+
+      	// 使用 JS animate
+      	} else {
+        	animateObj = {};
+        	animateObj[this.animProp] = value;
+        	if (type === 'slide') {
+          		$element.animate(animateObj, duration, this.options.easing, function() {
+            		updateAfterSlideTransition();
+          		});
+        	} else if (type === 'reset') {
+          		$element.css(this.animProp, value);
+        	} else if (type === 'ticker') {
+          		$element.animate(animateObj, duration, 'linear', function() {
+            		setPositionProperty(params.resetValue, 'reset', 0);
+            		// run the recursive loop after animation
+            		tickerLoop();
+          		});
+        	}
+      	}
+    };
+
+    /**
+     * Runs a continuous loop, news ticker-style
+     * 运行一个不断循环、创建一个ticker-style
+     */
+    var tickerLoop = function(resumeSpeed) {
+      	var speed = resumeSpeed ? resumeSpeed : this.options.speed,
+      		position = {left: 0, top: 0},
+      		reset = {left: 0, top: 0},
+      		animateProperty, resetValue, params;
+
+      	// 如果next动画left是最后一个子slide，重置left为0
+      	if (this.options.autoDirection === 'next') {
+        	position = $element.find('.liwy-clone').first().position();
+      	} else {
+        	reset = this.children.first().position();
+      	}
+      	animateProperty = this.options.mode === 'horizontal' ? -position.left : -position.top;
+      	resetValue = this.options.mode === 'horizontal' ? -reset.left : -reset.top;
+      	params = {resetValue: resetValue};
+      	setPositionProperty(animateProperty, 'ticker', speed, params);
     };
 
     //==============================工具方法 end=========================================
