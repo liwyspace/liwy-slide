@@ -1,23 +1,6 @@
-/*! liwy-slide - v1.0.0 - 2017-08-20
-* https://github.com/liwyspace/liwy-slide#readme
-* Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
-* https://github.com/liwyspace/liwy-slide#readme
-* Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
 body {
   color: #000000;
-  background-image: url("../img/liwy1.jpg");
-}
-
-.liwy {
-  background-color: #FF0099;
-  transition: transform 1s;
-  background-image: url("../img/liwy1.jpg");
-}
-
-.liwy:hover {
-  color: #990099;
 }
