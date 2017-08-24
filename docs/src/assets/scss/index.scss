@@ -2,15 +2,4 @@
 
 body {
 	color: #000000;
-	background-image: url('../img/liwy1.jpg');
-}
-
-.liwy {
-	background-color: #FF0099;
-	&:hover {
-		color: #990099;
-	}
-	transition :transform 1s;
-	background-image: url('../img/liwy1.jpg');
-	
 }

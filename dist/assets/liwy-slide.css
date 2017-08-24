@@ -1,47 +1,57 @@
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-/*! liwy-slide - v1.0.0 - 2017-08-20
+/*! liwy-slide - v1.0.0 - 2017-08-24
 * https://github.com/liwyspace/liwy-slide#readme
 * Copyright (c) 2017 liwy; Licensed MIT */
-body { color: #FF0099; }
+/*! liwy-slide - v1.0.0 - 2017-08-24
+* https://github.com/liwyspace/liwy-slide#readme
+* Copyright (c) 2017 liwy; Licensed MIT */
+/*! liwy-slide - v1.0.0 - 2017-08-24
+* https://github.com/liwyspace/liwy-slide#readme
+* Copyright (c) 2017 liwy; Licensed MIT */
+/*pager*/
+.liwy-wrapper .liwy-pager.liwy-default-pager a { background: #666; text-indent: -9999px; display: block; width: 10px; height: 10px; margin: 0 5px; outline: 0; border-radius: 5px; border-radius: 5px; }
 
-.liwy { background-color: #FF0099; transition: -webkit-transform 1s; transition: transform 1s; }
+.liwy-wrapper .liwy-pager.liwy-default-pager a:hover, .liwy-wrapper .liwy-pager.liwy-default-pager a.active { background: #000; }
 
-.liwy:hover { color: #990099; }
+/*controls*/
+.liwy-wrapper .liwy-controls-direction a { z-index: 9999; }
+
+.liwy-wrapper .liwy-controls-direction a.disabled { display: none; }

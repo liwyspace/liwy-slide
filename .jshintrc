@@ -4,7 +4,7 @@
     "browser": true,
     "debug": true,
     "devel": true,
-    "eqeqeq": true, 
+    "eqeqeq": false, 
     "eqnull": true, 
     "laxbreak": true, 
     "expr": true, 

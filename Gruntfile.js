@@ -134,8 +134,8 @@ module.exports = function (grunt) {
         //压缩css
         cssmin: {
             dist: {
-                src: 'dist/assets/index.css',
-                dest: 'dist/assets/index.min.css'
+                src: 'dist/assets/liwy-slide.css',
+                dest: 'dist/assets/liwy-slide.min.css'
             },
             docs: {
                 files: [{
@@ -391,6 +391,6 @@ module.exports = function (grunt) {
         grunt.task.run(['jshint:dist', 'karma:test']);
     });
 
-    grunt.registerTask('default',[]);
+    grunt.registerTask('default',['docs']);
 };
 

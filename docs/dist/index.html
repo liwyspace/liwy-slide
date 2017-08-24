@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- head -->
+<head>
     <meta charset="utf-8">
     <!-- 去掉winphone系统a、input标签被点击时产生的半透明灰色背景 -->
     <meta name="msapplication-tap-highlight" content="no" />
@@ -20,29 +20,28 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
+    <!-- liwy-slide Stylesheets -->
+    <link rel="stylesheet" href="assets/vendors/liwy-slide/assets/liwy-slide.min.css">
     <!-- Stylesheets -->
+
     <!-- build:css assets/css/index.min.css -->
 	<link rel="stylesheet" type="text/css" href="assets/css/index.css">
 	<!-- endbuild -->
-
-    <!-- Owl Stylesheets -->
-    <!-- <link rel="stylesheet" href="assets/vendors/liwy-slide/assets/liwy-slide.min.css"> -->
 
     <!-- javascript -->
     <script src="assets/vendors/jquery.min.js"></script>
     <script src="assets/vendors/liwy-slide/liwy-slide.min.js"></script>
 
-  </head>
+</head>
 <body>
-<div id="liwy-slide">
-  <div title="11111"> Your Content </div>
-  <div title="22222"> Your Content </div>
-  <div title="33333"> Your Content </div>
-  <div title="444444"> Your Content </div>
-  <div title="555555"> Your Content </div>
-  <div title="66666"> Your Content </div>
-  <div title="77777"> Your Content </div>
-</div>
+<ul id="liwy-slide">
+  <li><img src="assets/img/tree_root.jpg" title="Funky roots" /></li>
+  <li><img src="assets/img/hill_road.jpg" title="The long and winding road" /></li>
+  <li><img src="assets/img/trees.jpg" title="Happy trees" /></li>
+  <li><img src="assets/img/hill_trees.jpg" title="trees" /></li>
+  <li><img src="assets/img/me_trees.jpg" title="metrees" /></li>
+  <li><img src="assets/img/houses.jpg" title="houses" /></li>
+</ul>
 <!-- build:js assets/js/index.min.js -->
 <script type="text/javascript" src="assets/js/index.js"></script>
 <!-- endbuild -->
