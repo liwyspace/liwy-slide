@@ -122,7 +122,7 @@ module.exports = function (grunt) {
         concat: {
             dist: {
                 files: {
-                    'dist/<%=pkg.name%>.js': 'src/js/*'
+                    'dist/<%=pkg.name%>.js': 'src/js/*.js'
                 }
             },
             docs: {
