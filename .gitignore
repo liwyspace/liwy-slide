@@ -31,3 +31,4 @@ node_modules/
 bower_components
 .tmp/
 test/coverage/
+debug.log
