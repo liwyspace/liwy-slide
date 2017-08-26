@@ -1,26 +1,160 @@
 @charset 'utf-8';
-
-/*pager*/
-.liwy-wrapper .liwy-pager.liwy-default-pager a {
-	background: #666;
-  	text-indent: -9999px;
-  	display: block;
-  	width: 10px;
-  	height: 10px;
-  	margin: 0 5px;
-  	outline: 0;
-  	border-radius: 5px;
-  	border-radius: 5px;
-  	&:hover,&.active {
-  		background: #000;
-  	}
+/*
+<div class="liwy-wrapper">
+    <div class="liwy-viewport">
+        <ul id="...">
+            <li>
+                <img />
+                <div class="liwy-caption"><span>...</span></div>
+            </li>
+            ...
+        </ul>
+        <div class="liwy-controls liwy-has-controls-direction liwy-has-controls-auto liwy-has-pager">
+            <div class="liwy-controls-direction">
+                <a class="liwy-prev">...</a>
+                <a class="liwy-next">...</a>
+            </div>
+            <div class="liwy-controls-auto">
+                <div class="liwy-controls-auto-item"><a class="liwy-start">...</a></div>
+                <div class="liwy-controls-auto-item"><a class="liwy-stop active">...</a></div>
+            </div>
+            <div class="liwy-pager liwy-default-pager">
+                <div class="liwy-pager-item">
+                    <a data-slide-index="0" class="liwy-pager-link active"></a>
+                </div>
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+*/
+.liwy-wrapper {
+    position: relative;
+}
+.liwy-wrapper .liwy-viewport {
+    background-color: #FF9999;
+    >ul {
+        margin: 0;
+        padding: 0;
+        img{
+            display: block;
+        }
+    }
 }
 
-
-/*controls*/
-.liwy-wrapper .liwy-controls-direction a {
-  z-index: 9999;
+/* loader */
+.liwy-wrapper .liwy-loading {
+    height: 100%;
+    width: 100%;
+    min-height: 50px;
+    background: url('bx_loader.gif') center center no-repeat #ffffff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
 }
-.liwy-wrapper .liwy-controls-direction a.disabled {
-  display: none;
+
+/* image captions*/
+.liwy-wrapper .liwy-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(90, 90, 90, 0.70);
+    width: 100%;
+    span {
+        color: #fff;
+        font-family: Arial;
+        display: block;
+        font-size: .85em;
+        padding: 10px;
+    }
+}
+
+/* next/prev button */
+.liwy-wrapper .liwy-controls-direction {
+    a {
+        position: absolute;
+        top: 40%;
+        outline: 0;
+        width: 32px;
+        height: 32px;
+        text-indent: -9999px;
+        z-index: 9999;
+        &.disabled {
+            display: none;
+        }
+    }
+
+    .liwy-prev {
+        left: 10px;
+        background: url('controls.png') no-repeat 0 -32px;
+        &:hover,&:focus {
+            background-position: 0 0;
+        }
+    }
+    .liwy-next {
+        right: 10px;
+        background: url('controls.png') no-repeat -43px -32px;
+        &:hover,&:focus {
+            background-position: -43px 0;
+        }
+    }
+}
+
+/* start/stop button */
+.liwy-wrapper .liwy-controls-auto {
+    text-align: center;
+    float: right;
+
+    .liwy-controls-auto-item {
+        display: inline-block;
+        vertical-align: bottom;
+        .liwy-start {
+            display: block;
+            text-indent: -9999px;
+            width: 10px;
+            height: 11px;
+            outline: 0;
+            background: url('controls.png') -86px -11px no-repeat;
+            margin: 0 3px;
+            &:hover,&.active,&:focus {
+                background-position: -86px 0;
+            }
+        }
+        .liwy-stop {
+            display: block;
+            text-indent: -9999px;
+            width: 9px;
+            height: 11px;
+            outline: 0;
+            background: url('controls.png') -86px -44px no-repeat;
+            margin: 0 3px;
+            &:hover,&.active,&:focus {
+                background-position: -86px -33px;
+            }
+        }
+    }
+}
+
+/* pager */
+.liwy-wrapper .liwy-pager {
+    text-align: left;
+    width: 80%;
+    .liwy-pager-item {
+        display: inline-block;
+        vertical-align: bottom;
+        a {
+            background: #666;
+            text-indent: -9999px;
+            display: block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            outline: 0;
+            border-radius: 5px;
+            &:hover, &.active {
+              background: #000;
+            }
+        }
+    }
 }

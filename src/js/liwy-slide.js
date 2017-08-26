@@ -49,6 +49,7 @@
         randomStart: false, //是否随机幻灯片位置开始,boolean
         captions: true, //显示image的title属性
         infiniteLoop: true, //是否无限循环，boolean
+        speed: 500, //transition时间
         //next/prev控制按钮
         controls: true,  //是否使用next/prev按钮
         nextText: 'Next', //next按钮显示文本
@@ -68,13 +69,13 @@
         pagerCustom: null, //自定义page图标，必须包含和slide个数一样的<a data-slide-index="x">元素。不适用于dynamic carousels。,jQuery selector
         // AUTO
         auto: true, //是否开启自动转换功能
-        autoStart: false, //自动开始播放。如果false，当单击“开始”控件时，将开始自动播放
         pause: 2000, //自动转换的间隔
         autoDirection: 'next',//next,prev; 自动显示幻灯片切换的方向
+        autoStart: true, //自动开始播放。如果false，当单击“开始”控件时，将开始自动播放
+        autoDelay: 5000, //自动显示应在启动前等待时间
         // stopAutoOnClick: false,//与控件交互将停止自动播放
         // autoHover: false, //当鼠标悬停在滑块上时，自动显示将暂停
-        // autoDelay: 0, //自动显示应在启动前等待时间
-        // autoSlideForOnePage: false,
+        
     };
 
     /**
@@ -93,6 +94,7 @@
         }
         //设置活动对象的位置信息
         this.active = { index: this.options.startSlide };
+        if (this.active.index === this.getPagerNumber() - 1) { this.active.last = true; }
         // 确定哪些属性用于转换
         this.animProp = this.options.mode === 'vertical' ? 'top' : 'left';
 
@@ -149,7 +151,7 @@
         // 设置slide的宽度
         var slideWidth = this.viewport.width();
         this.children.css('width', slideWidth);
-
+        
         // 添加图片标题
         if (this.options.captions) {
             this.children.each(function(index) {
@@ -272,9 +274,9 @@
      * 启动插件
      */
     LiwySlide.prototype.start = function() {
-        // if infinite loop, prepare additional slides
         
-        if (this.options.infiniteLoop && this.options.mode !== 'fade' /*&& !this.options.ticker*/) {
+        //如果无限循环，复制第一个slide放到最后，复制最后一个slide放到最前
+        if (this.options.infiniteLoop && this.options.mode !== 'fade') {
             var slice = 1,
                 sliceAppend  = this.children.slice(0, slice).clone(true).addClass('liwy-clone'),
                 slicePrepend = this.children.slice(-slice).clone(true).addClass('liwy-clone');
@@ -284,22 +286,35 @@
 
         // 移除加载中div
         this.loader.remove();
-        
-        // 设置$element的left/top坐标
-        // get the position of the first showing slide
-        var position = this.children.eq(this.active.index * this.getMoveNumber()).position();
-        // check for last slide
-        if (this.active.index === this.getPagerNumber() - 1) { this.active.last = true; }
-        // set the respective position
-        if (position !== undefined) {
-          if (this.options.mode === 'horizontal') { this.transitionAnimate(-position.left, 'reset', 0); }
-          else if (this.options.mode === 'vertical') { this.transitionAnimate(-position.top, 'reset', 0); }
+
+        //重置slide的position坐标
+        this.setSlidePosition();
+
+        //更新pager的活动样式
+        if (this.options.pager) { this.updatePagerActive(this.options.startSlide); } 
+        //更新controls的样式
+        if (this.options.controls) { this.updateDirectionControls(); } 
+
+        //当窗口大小改变时调整样式
+        $(window).bind('resize', $.proxy(function(e) {
+
+            //redrawSlider
+            this.children.add(this.$element.find('.liwy-clone')).outerWidth(this.viewport.width());
+
+            //重置slide的position坐标
+            this.setSlidePosition();
+
+        },this));
+
+        //设置auto start
+        if (this.options.auto && this.options.autoStart) {
+            // 自动启动前等待时间
+            if (this.options.autoDelay > 0) {
+                var timeout = setTimeout($.proxy(this.startAuto,this), this.options.autoDelay);
+            } else {
+                this.startAuto();
+            }
         }
-
-        // if pager is requested, make the appropriate pager link active
-        if (this.options.pager) { this.updatePagerActive(this.options.startSlide); } //更新pager的活动样式
-        if (this.options.controls) { this.updateDirectionControls(); } //更新controls的样式
-
     };
 
 
@@ -318,6 +333,10 @@
      *  - 方向 "prev" / "next"
      */
     LiwySlide.prototype.goToSlide = function(pagerIndex, direction) {
+        // 判断slide是否正在转换中，忽略
+        if (this.working || this.active.index === this.oldIndex) { return; }
+        this.working = true;//设置slide正在转换
+
         var position = {left: 0, top: 0},
             value, 
             requestEl;
@@ -344,10 +363,7 @@
         // 是否为最后一个
         this.active.last = this.active.index >= this.getPagerNumber() - 1;
 
-        // 判断slide是否正在转换中，忽略
-        if (this.working || this.active.index === this.oldIndex) { return; }
-        this.working = true;//设置slide正在转换
-
+        
         // 更新pager的激活状态
         if (this.options.pager || this.options.pagerCustom) { this.updatePagerActive(this.active.index); }
         // 更新next/prev按钮的激活状态
@@ -374,7 +390,7 @@
         }
 
         //转换结束，重置working状态
-        this.working = false;
+        // this.working = false;
     };
 
 
@@ -596,6 +612,20 @@
         // 声明转换动画完成
         this.working = false;
     };
+
+    /**
+     * 设置slide的 position
+     */
+    LiwySlide.prototype.setSlidePosition = function() {
+        // 设置$element的开始时的left/top坐标
+        var position = this.children.eq(this.active.index * this.getMoveNumber()).position();
+        // 移动到开始时的位置
+        if (position !== undefined) {
+          if (this.options.mode === 'horizontal') { this.transitionAnimate(-position.left, 'reset', 0); }
+          else if (this.options.mode === 'vertical') { this.transitionAnimate(-position.top, 'reset', 0); }
+        }
+    };
+
     //===================================================================================
     //============================== 工具方法 end =======================================
     //===================================================================================

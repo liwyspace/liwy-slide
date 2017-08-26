@@ -189,7 +189,8 @@ module.exports = function (grunt) {
         //压缩js
         uglify: {
             options: {
-                banner: '<%=banner%>'
+                banner: '<%=banner%>',
+                sourceMap: true
             },
             dist: {
                 files:{
