@@ -212,7 +212,20 @@ module.exports = function (grunt) {
         compress: {
             zip: {
                 options: {
-                    archive: 'docs/dist/download/liwy-slide.<%= pkg.version %>.zip'
+                    archive: 'docs/dist/download/liwy-slide-<%= pkg.version %>.zip',
+                    mode:'zip'
+                },
+                files: [ {
+                    expand: true,
+                    cwd: 'dist/',
+                    src: [ '**' ],
+                    dest: 'liwy-slide.<%= pkg.version %>'
+                }]
+            },
+            tgz: {
+                options: {
+                    archive: 'docs/dist/download/liwy-slide-<%= pkg.version %>.tar.gz',
+                    mode: 'tgz'
                 },
                 files: [ {
                     expand: true,
@@ -232,7 +245,6 @@ module.exports = function (grunt) {
                         'docs/dist/assets/css/{,*/}*.min.css',
                         'docs/dist/assets/js/{,*/}*.min.js',
                         'docs/dist/assets/img/{,*/}*.*',
-                        'docs/dist/download/*.zip',
                         'docs/dist/*.{ico,png}'
                     ]
                 }
